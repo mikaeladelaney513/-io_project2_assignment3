@@ -1,0 +1,84 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+	<script src="../lib/p5.speech.js"></script>
+	<script>
+
+let myRec = new p5.SpeechRec;
+myRec.continuous = false;
+myRec.interimResults = true;
+let myVoice = new p5.Speech();
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  myRec.start();
+  myRec.onResult = parseResult;
+  myRec.onEnd = restartRec;
+
+  myVoice.speak('Say any colour from the rainbow');
+
+}
+
+function draw() {
+}
+
+function parseResult() {
+  let lowStr = myRec.resultString.toLowerCase();
+  let mostrecentword = lowStr.split(' ').pop();
+
+  if (mostrecentword.indexOf("red") !== -1) {
+    fill(255, 0, 0); 
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+
+  	} else if (mostrecentword.indexOf("orange") !== -1) {
+    fill(255, 155, 0);
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+
+	} else if (mostrecentword.indexOf("yellow") !== -1) {
+    fill(255, 255, 0);
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+
+	} else if (mostrecentword.indexOf("green") !== -1) {
+    fill(0, 255, 0);
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+
+	} else if (mostrecentword.indexOf("blue") !== -1) {
+    fill(0, 0, 255);
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+
+	} else if (mostrecentword.indexOf("purple") !== -1) {
+    fill(170, 0, 255);
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+
+  	} else if (mostrecentword.indexOf("pink") !== -1) {
+    fill(255, 0, 255);
+    // fill(random(255), 0, 255);
+    noStroke();
+    ellipse(random(0, 600), random(0, 800), 50, 50);
+    myVoice.speak('pink');
+
+  } else if (mostrecentword.indexOf("stop") !== -1) {
+    myVoice.speak('ok.');
+  } 
+
+  console.log(mostrecentword);
+}
+
+//to make sure recognition restarts when it ends
+function restartRec() {
+  print("end");
+  myRec.start();
+}
+
+</script>
+</head>
+<body>
+</body>
+</html>

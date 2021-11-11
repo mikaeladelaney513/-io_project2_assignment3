@@ -1,0 +1,52 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+	<script src="../lib/p5.speech.js"></script>
+	<script>
+
+	var words = ["i", "like", "colors"]; // some words
+	var iptr = 0; // a counter for the words
+	var myVoice = new p5.Speech(); // new P5.Speech object
+
+	var colour = (random(0,255), random(0,255), random(0,255));
+	
+	function setup()
+	{
+		createCanvas(720, 400);
+		background(0);
+		textSize(72);
+		textAlign(CENTER);
+		text("click me", width/2, height/2);
+	}
+
+	function draw()
+	{}
+
+	function doList()
+	{
+		myVoice.listVoices(); // debug printer for voice options
+	}
+
+	// function keyPressed()
+	// {
+	// 	clear();
+	// }
+
+	function mousePressed()
+	{
+		if(mouseX<width && mouseY<height) {
+			fill (random(0,255), random(0,255), random(0,255));
+			ellipse(mouseX, mouseY, 50, 50);
+			myVoice.setVoice(Math.floor(random(myVoice.voices.length)));
+			myVoice.speak(words[iptr]);
+			iptr = (iptr+1) % words.length; 
+			console.log(random(0,255));
+		}
+	}
+
+</script>
+</head>
+<body>
+</body>
+</html>

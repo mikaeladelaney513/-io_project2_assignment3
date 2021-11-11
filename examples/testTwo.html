@@ -1,0 +1,34 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+	<script src="../lib/p5.speech.js"></script>
+	<script>
+
+const companion = new p5.Speech(); // create a new speech synthesis object
+
+function setup() {
+  createCanvas(400, 400);
+  textAlign(CENTER);
+  textSize(18);
+}
+
+function draw() {
+  background(255, 207, 253);
+  text("click on the screen to hear me speak", width/2, height/2);
+}
+
+function mousePressed() {
+
+  companion.listVoices();
+  companion.setVoice("Victoria");
+  companion.speak("The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.");
+
+}
+
+
+</script>
+</head>
+<body>
+</body>
+</html>
